@@ -109,7 +109,7 @@ class TAQStats():
         uncleaned_statistics = [day_length, quote_number, trade_number, fraction, mean_ret, median_ret, std_ret,
                                 absolute_dev, skew, kurtosis, maximum_drawdown]
 
-        day_length = self.get_day_length(use_cleaned=True)
+        #day_length = self.get_day_length()
         quote_number = self.get_number_quote(use_cleaned=True)
         trade_number = self.get_number_trade(use_cleaned=True)
         fraction = self.get_tradequote_fraction(use_cleaned=True)
