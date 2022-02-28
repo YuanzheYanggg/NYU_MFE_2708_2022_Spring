@@ -51,7 +51,7 @@ class PortfolioOptimizer():
         print("the risk-aversion parameter is {}".format(self.aversion_param))
         x, _return, _risk = self.compute_holdings()
         print("The 5-largest portion ticker in our portfolio:")
-        print(tickers[pd.Series(x).nlargest(5).index])
+        print(self.tickers[pd.Series(x).nlargest(5).index])
         print("Corresponding holding percentage:")
         print(pd.Series(x).nlargest(5))
         print("Total portfolio optimized return: {}".format(_return))
