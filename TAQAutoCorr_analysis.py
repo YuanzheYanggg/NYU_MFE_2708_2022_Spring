@@ -38,6 +38,8 @@ class TAQAutoCorr_analysis():
             if p_value > 0.05:
                 # not reject null hypothesis and conclude that the series itself is stationary
                 return freq
+        return self.freq[-1]
+    
 
     def Dickey_Fuller_test(self, threshold=0.05):
         if not self.use_cleaned:
@@ -57,6 +59,7 @@ class TAQAutoCorr_analysis():
             p_value = result[1]
             if p_value < 0.05:
                 return freq
+        return self.freq[-1]
 
 
 if __name__ == "__main__":
