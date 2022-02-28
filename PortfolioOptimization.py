@@ -15,8 +15,9 @@ such quadratic objective function resembles g(X) = -Expected portfolio return(X)
                                                      vol stands for the covariance matrix of holding portfolio
 the restrictions are also expressed through G,h,A,b
 """
-class PortfolioOptimizer():
 
+
+class PortfolioOptimizer():
     def __init__(self, ret, cov, aversion_param,tickers):
         self.ret = ret
         self.cov = cov

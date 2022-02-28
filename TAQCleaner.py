@@ -14,14 +14,15 @@ but a discussion on do we have to fill those nan values before calculated statis
 '''
 
 
-class TAQCleaner:
+class TAQCleaner(object):
     def __init__(self, ticker_name, write_to_file=False):
         self.ticker_name = ticker_name
         self.cur_dir = os.getcwd()
-        self.trade_df_dir = os.path.join(os.path.join(self.cur_dir,"data/trades_test/Daily_trade"),
+        # if you are using trade_test, please change the dir path to trades_test
+        self.trade_df_dir = os.path.join(os.path.join(self.cur_dir,"data/trades/Daily_trade"),
                                          self.ticker_name + ".parquet.gzip")
-
-        self.quote_df_dir = os.path.join(os.path.join(self.cur_dir, "data/quotes_test/Daily_quote"),
+        # if you are using quote_test, please change the dir path to quotes_test
+        self.quote_df_dir = os.path.join(os.path.join(self.cur_dir, "data/quotes/Daily_quote"),
                                          self.ticker_name + ".parquet.gzip")
         self.write_to_file = write_to_file
         self.trade_df = pd.read_parquet(self.trade_df_dir)

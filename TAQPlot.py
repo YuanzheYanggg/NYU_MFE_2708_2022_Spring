@@ -10,15 +10,19 @@ import TAQStats
 import TAQUtils
 
 
-class TAQPlot():
+# if you are using trade_test, please change the dir path to trades_test
+# if you are using quote_test, please change the dir path to quotes_test
+
+
+class TAQPlot(object):
 
     def __init__(self):
         pass
 
     def plot_adjusted(self, ticker_name):
         splitting_df = pd. read_csv("./splitting_info.csv")
-        trade_ticker_name_dir = os.path.join("./data/trades_test/Daily_trade",ticker_name + ".parquet.gzip")
-        quote_ticker_name_dir = os.path.join("./data/quotes_test/Daily_quote",ticker_name + ".parquet.gzip")
+        trade_ticker_name_dir = os.path.join("./data/trades/Daily_trade",ticker_name + ".parquet.gzip")
+        quote_ticker_name_dir = os.path.join("./data/quotes/Daily_quote",ticker_name + ".parquet.gzip")
         if ticker_name not in list(splitting_df["Ticker"]):
             print("this ticker did not experience any change in adjust factor")
         else:
@@ -80,9 +84,9 @@ class TAQPlot():
             plt.show()
         return
 
-    def plot_cleaned(self,ticker_name):
-        trade_ticker_name_dir = os.path.join("./data/trades_test/Daily_trade", ticker_name + ".parquet.gzip")
-        quote_ticker_name_dir = os.path.join("./data/quotes_test/Daily_quote", ticker_name + ".parquet.gzip")
+    def plot_cleaned(self, ticker_name):
+        trade_ticker_name_dir = os.path.join("./data/trades/Daily_trade", ticker_name + ".parquet.gzip")
+        quote_ticker_name_dir = os.path.join("./data/quotes/Daily_quote", ticker_name + ".parquet.gzip")
 
         TAQCleaner_obj = TAQCleaner.TAQCleaner(ticker_name)
         uncleaned_trade_df = pd.read_parquet(trade_ticker_name_dir)
@@ -235,6 +239,6 @@ class TAQPlot():
 if __name__ == "__main__":
     TAQPlot_obj = TAQPlot()
     # TAQPlot_obj.plot_adjusted("ABC")
-    # TAQPlot_obj.plot_cleaned("ABC")
+    TAQPlot_obj.plot_cleaned("AAPL")
     # TAQPlot_obj.plot_minimum_freq()
-    TAQPlot_obj.plot_statistics_on_ret("TXT",10)
+    # TAQPlot_obj.plot_statistics_on_ret("TXT",10)

@@ -6,10 +6,11 @@ from statsmodels.stats.diagnostic import acorr_ljungbox
 from statsmodels.tsa.stattools import adfuller
 
 
-class TAQAutoCorr_analysis():
+class TAQAutoCorr_analysis(object):
     def __init__(self, ticker_name, use_cleaned=False):
         self.ticker_name = ticker_name
-        self.trade_dir = os.path.join("./data/trades_test/Daily_trade", ticker_name + ".parquet.gzip")
+        # if you are using trade_test, please change the dir path to trades_test
+        self.trade_dir = os.path.join("./data/trades/Daily_trade", ticker_name + ".parquet.gzip")
         self.uncleaned_trade_df = pd.read_parquet(self.trade_dir)
         self.data_exist = True
         if self.uncleaned_trade_df.shape[0] == 0:
@@ -38,8 +39,8 @@ class TAQAutoCorr_analysis():
             if p_value > 0.05:
                 # not reject null hypothesis and conclude that the series itself is stationary
                 return freq
-        return self.freq[-1]
-    
+
+        return self.freq_list[-1]
 
     def Dickey_Fuller_test(self, threshold=0.05):
         if not self.use_cleaned:
@@ -59,7 +60,8 @@ class TAQAutoCorr_analysis():
             p_value = result[1]
             if p_value < 0.05:
                 return freq
-        return self.freq[-1]
+
+        return self.freq_list[-1]
 
 
 if __name__ == "__main__":

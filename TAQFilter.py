@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 def collect_ticker_ret():
-    df = pd.read_excel("./Data/s&p500.xlsx", sheet_name="WRDS", engine="openpyxl")
+    df = pd.read_excel("./data/s&p500.xlsx", sheet_name="WRDS", engine="openpyxl")
     df = df[["Names Date", "Trading Symbol", "Returns", "Volume", "Price or Bid/Ask Average", "Shares Outstanding"]]
     df.dropna(inplace=True)
     df.rename(columns={"Names Date": "Date", "Trading Symbol": "Ticker"}, inplace=True)
@@ -15,7 +15,7 @@ def collect_ticker_ret():
 
 
 def extract_tickers():
-    df = pd.read_excel("./Data/s&p500.xlsx", sheet_name="WRDS", engine="openpyxl")
+    df = pd.read_excel("./data/s&p500.xlsx", sheet_name="WRDS", engine="openpyxl")
     # since same ticker will possibly have different adjust factors for different dates
     # so we need to include both dates and ticker symbol as our search key
 

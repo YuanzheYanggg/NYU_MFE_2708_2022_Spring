@@ -18,7 +18,8 @@ def concat_date():
     cur_dir = os.getcwd()
 
     # concatenate pickle files for trades records
-    trade_dir = os.path.join(cur_dir,"data/trades_test")
+    # if you are using trade_test, please change the dir path to trades_test
+    trade_dir = os.path.join(cur_dir,"data/trades")
     trade_save_dir = os.path.join(trade_dir, "Daily_trade")
     if not os.path.exists(trade_save_dir):
         os.mkdir(trade_save_dir)
@@ -52,7 +53,8 @@ def concat_date():
         df.to_parquet(os.path.join(trade_save_dir,ticker + ".parquet.gzip"),compression = "gzip")
 
     # concatenate pickle files for quotes records
-    quote_dir = os.path.join(cur_dir, "data/quotes_test")
+    # if you are using trade_test, please change the dir path to quotes_test
+    quote_dir = os.path.join(cur_dir, "data/quotes")
     quote_save_dir = os.path.join(quote_dir, "Daily_quote")
     if not os.path.exists(quote_save_dir):
         os.mkdir(quote_save_dir)
@@ -97,7 +99,7 @@ we adjust the historical price and size, namely the price and size before such e
 '''
 
 
-class TAQAdjust():
+class TAQAdjust(object):
     def __init__(self, date, factors_df, splitting_df):
         self.date = date
         self.factors_df = factors_df
@@ -139,7 +141,8 @@ class TAQAdjust():
         return previous_factor_price, new_factor_price, previous_factor_volume, new_factor_volume
 
     def retrieve_trade(self):
-        sub_path = "data/trades_test"
+        # if you are using trade_test, please change the dir path to trades_test
+        sub_path = "data/trades"
         path = os.path.join(self.cur_dir, sub_path)
         whole_path = os.path.join(path, self.date)
         if not os.path.exists(os.path.join(whole_path,"Adjusted")):
@@ -207,7 +210,8 @@ class TAQAdjust():
         return
 
     def retrieve_quote(self):
-        sub_path = "data/quotes_test"
+        # if you are using quote_test, please change the dir path to trades_test
+        sub_path = "data/quotes"
         path = os.path.join(self.cur_dir, sub_path)
         whole_path = os.path.join(path, self.date)
         if not os.path.exists(os.path.join(whole_path,"Adjusted")):

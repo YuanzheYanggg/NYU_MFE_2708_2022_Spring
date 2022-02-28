@@ -4,13 +4,14 @@ import pandas as pd
 import numpy as np
 import os
 
-
-class TAQStats():
+# if you are using trade_test, please change the dir path to trades_test
+# if you are using quote_test, please change the dir path to quotes_test
+class TAQStats(object):
     def __init__(self,ticker_name):
         self.ticker_name = ticker_name
-        self.trade_dir = os.path.join("./data/trades_test/Daily_trade", ticker_name + ".parquet.gzip")
+        self.trade_dir = os.path.join("./data/trades/Daily_trade", ticker_name + ".parquet.gzip")
         self.uncleaned_trade_df = pd.read_parquet(self.trade_dir)
-        self.quote_dir = os.path.join("./data/quotes_test/Daily_quote", ticker_name + ".parquet.gzip")
+        self.quote_dir = os.path.join("./data/quotes/Daily_quote", ticker_name + ".parquet.gzip")
         self.uncleaned_quote_df = pd.read_parquet(self.quote_dir)
         self.TAQCleaner_obj = TAQCleaner.TAQCleaner(self.ticker_name)
         self.TAQCleaner_obj.clean_trades()
@@ -109,7 +110,6 @@ class TAQStats():
         uncleaned_statistics = [day_length, quote_number, trade_number, fraction, mean_ret, median_ret, std_ret,
                                 absolute_dev, skew, kurtosis, maximum_drawdown]
 
-        #day_length = self.get_day_length()
         quote_number = self.get_number_quote(use_cleaned=True)
         trade_number = self.get_number_trade(use_cleaned=True)
         fraction = self.get_tradequote_fraction(use_cleaned=True)
@@ -122,6 +122,7 @@ class TAQStats():
         df = pd.DataFrame({"Statistic_measures":statistic_measures, "uncleaned": uncleaned_statistics, "cleaned": cleaned_statistics})
         df.set_index("Statistic_measures", inplace=True)
         return df
+
 
 if __name__ == "__main__":
     TAQStats_obj = TAQStats("TXT")
